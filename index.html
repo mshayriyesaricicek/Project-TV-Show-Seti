@@ -1,21 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
-    <link href="style.css" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <title>Project TV Show | Seti Mussa (Seti-Jemal)</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
-    <div id="root">
-    </div>
+    <main class="page">
+      <header class="page-header">
+        <h1>TV Show Episodes</h1>
+        <p class="episode-count" id="episode-count"></p>
+      </header>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
+      <section
+        id="root"
+        class="episode-grid"
+        aria-label="List of TV show episodes"
+      ></section>
+    </main>
+
+    <footer class="page-footer">
+      <p>
+        Episode data originally comes from
+        <a href="https://tvmaze.com/" target="_blank" rel="noopener noreferrer"
+          >TVMaze.com</a
+        >.
+      </p>
+    </footer>
+
     <script src="episodes.js"></script>
-
-    <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
 </html>

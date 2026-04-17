@@ -1,3 +1,5 @@
+let allEpisodes = [];
+
 function formatEpisodeCode(season, episodeNumber) {
   const paddedSeason = String(season).padStart(2, "0");
   const paddedEpisodeNumber = String(episodeNumber).padStart(2, "0");
@@ -12,7 +14,7 @@ function createEpisodeCard(episode) {
   heading.className = "episode-title";
   heading.textContent = `${episode.name} - ${formatEpisodeCode(
     episode.season,
-    episode.number
+    episode.number,
   )}`;
 
   const image = document.createElement("img");
@@ -63,10 +65,27 @@ function updateEpisodeCount(episodes) {
   episodeCountElement.textContent = `Showing ${episodes.length} episode(s)`;
 }
 
+function render() {
+  const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+
+  const filteredEpisodes = allEpisodes.filter((episode) => {
+    const name = episode.name.toLowerCase();
+    const summary = (episode.summary || "").toLowerCase();
+
+    return name.includes(searchTerm) || summary.includes(searchTerm);
+  });
+
+  displayEpisodes(filteredEpisodes);
+  updateEpisodeCount(filteredEpisodes);
+}
+
 function setup() {
-  const allEpisodes = getAllEpisodes();
+  allEpisodes = getAllEpisodes();
   displayEpisodes(allEpisodes);
   updateEpisodeCount(allEpisodes);
+
+  const searchInput = document.getElementById("searchInput");
+  searchInput.addEventListener("input", render);
 }
 
 window.onload = setup;

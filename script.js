@@ -34,7 +34,7 @@ function createEpisodeCard(episode) {
   sourceLink.className = "episode-link";
 
   const link = document.createElement("a");
-  link.href = episode.url;
+  link.href = episode.url || "#";
   link.target = "_blank";
   link.rel = "noopener noreferrer";
   link.textContent = "View this episode on TVMaze";
@@ -66,11 +66,22 @@ function updateEpisodeCount(episodes) {
 }
 
 function render() {
-  const searchTerm = document.getElementById("searchInput").value.toLowerCase();
-
+  const searchTerm = (
+    document.getElementById("searchInput").value || ""
+  ).toLowerCase();
+  const selectedEpisode = document.getElementById("episodeSelect").value;
   const filteredEpisodes = allEpisodes.filter((episode) => {
-    const name = episode.name.toLowerCase();
+    const name = (episode.name || "").toLowerCase();
     const summary = (episode.summary || "").toLowerCase();
+
+    const matchesSearch =
+      name.includes(searchTerm) || summary.includes(searchTerm);
+
+    const matchesEpisode =
+      selectedEpisode === "all" ||
+      String(episode.id) === String(selectedEpisode);
+
+    return matchesSearch && matchesEpisode;
 
     return name.includes(searchTerm) || summary.includes(searchTerm);
   });
@@ -85,7 +96,10 @@ function setup() {
   updateEpisodeCount(allEpisodes);
 
   const searchInput = document.getElementById("searchInput");
+  const episodeSelect = document.getElementById("episodeSelect");
+
   searchInput.addEventListener("input", render);
+  episodeSelect.addEventListener("change", render);
 }
 
 window.onload = setup;

@@ -8,28 +8,9 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <main class="page">
-      <header class="page-header">
-        <h1>TV Show Episodes</h1>
-        <p id="episode-count" class="episode-count"></p>
-      </header>
+    <div id="root"></div>
 
-      <section
-        id="root"
-        class="episode-grid"
-        aria-label="List of TV show episodes"
-      ></section>
-    </main>
-
-    <footer class="page-footer">
-      <p>
-        Episode data originally comes from
-        <a href="https://tvmaze.com/" target="_blank" rel="noopener noreferrer">
-          TVMaze.com </a
-        >.
-      </p>
-    </footer>
-
+    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
     <script src="script.js"></script>
   </body>

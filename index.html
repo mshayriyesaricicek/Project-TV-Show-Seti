@@ -5,13 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TV Show Project | Seti Mussa (Seti-Jemal)</title>
     <link href="style.css" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
   </head>
+
   <body>
-    <div id="root"></div>
+    <main class="page">
+      <header class="page-header">
+        <h1>TV Show Episodes</h1>
+
+        <p id="episode-count" class="episode-count"></p>
+
+        <input type="text" id="searchInput" placeholder="Search episodes..." />
+
+        <select id="episodeSelect">
+          <option value="all">All episodes</option>
+        </select>
+
+        <button id="clearFilters">Clear Filters</button>
+
+        <p id="activeFilters"></p>
+        <p id="helperMessage"></p>
+      </header>
+
+      <section
+        id="root"
+        class="episode-grid"
+        aria-label="List of TV show episodes"
+      ></section>
+    </main>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
+
+    <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
 </html>

@@ -66,17 +66,21 @@ function updateEpisodeCount(episodes) {
 }
 
 function render() {
+  const searchInput = document.getElementById("searchInput");
+  const episodeSelect = document.getElementById("episodeSelect");
   const clearButton = document.getElementById("clearFilters");
   const activeFiltersText = document.getElementById("activeFilters");
   const helperMessage = document.getElementById("helperMessage");
 
-  const searchTerm = searchInput.value.toLowerCase();
+  const searchTerm = (searchInput.value || "").trim().toLowerCase();
   const selectedEpisode = episodeSelect.value;
 
   const filteredEpisodes = allEpisodes.filter((episode) => {
     const episodeCode = formatEpisodeCode(episode.season, episode.number);
     const name = (episode.name || "").toLowerCase();
-    const summary = (episode.summary || "").toLowerCase();
+    const summary = (episode.summary || "")
+      .replace(/<[^>]*>/g, "")
+      .toLowerCase();
 
     const matchesSearch =
       name.includes(searchTerm) || summary.includes(searchTerm);
@@ -114,12 +118,12 @@ function render() {
 
 function populateEpisodes(episodes) {
   const episodeSelect = document.getElementById("episodeSelect");
-  episodeSelect.innerHTML = ""; // Clear existing options
+  //episodeSelect.innerHTML = ""; // Clear existing options
 
-  const defaultOption = document.createElement("option");
-  defaultOption.value = "all";
-  defaultOption.textContent = "All Episodes";
-  episodeSelect.appendChild(defaultOption);
+  //const defaultOption = document.createElement("option");
+  //defaultOption.value = "all";
+  //defaultOption.textContent = "All Episodes";
+  //episodeSelect.appendChild(defaultOption);
 
   episodes.forEach((episode) => {
     const option = document.createElement("option");
@@ -132,6 +136,7 @@ function populateEpisodes(episodes) {
 
 function setup() {
   allEpisodes = getAllEpisodes();
+
   populateEpisodes(allEpisodes);
   displayEpisodes(allEpisodes);
   updateEpisodeCount(allEpisodes);

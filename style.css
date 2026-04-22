@@ -69,6 +69,14 @@ body {
   color: #0056b3;
 }
 
+.show-card {
+  cursor: pointer;
+}
+
+.show-card img {
+  display: block;
+  margin: 0 auto;
+}
 .page-footer {
   max-width: 1200px;
   margin: 0 auto;

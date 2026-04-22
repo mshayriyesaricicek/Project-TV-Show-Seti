@@ -52,6 +52,42 @@ function createEpisodeCard(episode) {
   return article;
 }
 
+function createShowCard(show) {
+  const article = document.createElement("article");
+  article.className = "show-card";
+
+  const title = document.createElement("h2");
+  title.textContent = show.name;
+
+  const image = document.createElement("img");
+  image.src = show.image ? show.image.medium : "";
+  image.alt = `${show.name} image`;
+
+  const summary = document.createElement("div");
+  summary.innerHTML = show.summary || "";
+
+  article.appendChild(title);
+  article.appendChild(image);
+  article.appendChild(summary);
+
+  // 👇 IMPORTANT: click → load episodes
+  article.addEventListener("click", () => {
+    loadEpisodesForShow(show.id);
+  });
+
+  return article;
+}
+
+function displayShows(shows) {
+  const rootElement = document.getElementById("root");
+  rootElement.innerHTML = "";
+
+  shows.forEach((show) => {
+    const showCard = createShowCard(show);
+    rootElement.appendChild(showCard);
+  });
+}
+
 function displayEpisodes(episodes) {
   const rootElement = document.getElementById("root");
   rootElement.innerHTML = "";
@@ -175,10 +211,7 @@ async function fetchShows() {
     allShows = await response.json();
     populateShows(allShows);
 
-    const firstShowId = showSelect.value;
-    if (firstShowId) {
-      await loadEpisodesForShow(firstShowId);
-    }
+    displayShows(allShows);
 
     loadingMessage.textContent = "";
   } catch (error) {
